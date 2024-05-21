@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 0}
   spawnPoints:
-  - {fileID: 0}
+  - {fileID: 2735837740964505214}
   player: {fileID: 0}
