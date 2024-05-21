@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.Demo.Cockpit;
 
 public class PhotonLobby : MonoBehaviourPunCallbacks
 {
@@ -18,7 +19,7 @@ private void Awake()
 }
 void Start()
 {
-    //PhotonNetwork.ConnecUsingSettings();
+    PhotonNetwork.ConnectUsingSettings();
 }
 
 public override void OnConnectedToMaster()
@@ -43,19 +44,17 @@ public override void OnJoinRandomFailed(short returnCode, string message)
 }
 
 void CreateRoom()
-{
-    Debug.Log("funciona Createroom");
-    //int randomRoomName = randomRoomName.Range(0,10000);
-   // RoomOptions roomOps = new RoomOptions()
-    //{
-       // IsVisible = true;
-       // IsOpen = true;
-        //MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayers
-
-   // };
-    //PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps, null);
-
-}
+    {
+        Debug.Log("llego a create room");
+        int randomRoomName = Random.Range(0, 10000);
+        RoomOptions roomOps = new RoomOptions()
+        {
+            IsVisible = true,
+            IsOpen = true,
+            MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayers
+        };
+        PhotonNetwork.CreateRoom("Room"+ randomRoomName, roomOps, null);
+    }
 
 public override void OnCreateRoomFailed(short returnCode, string message)
 {
