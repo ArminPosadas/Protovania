@@ -27,6 +27,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void Awake()
     {
+       
         if (PhotonRoom.room == null)
         {
             PhotonRoom.room = this;
@@ -121,6 +122,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
         else
         {
+           
             StartGame();
         }
     }
@@ -169,9 +171,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         readyToCount = false;
         readyToStart = false;
     }
+    
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+
         currentScene = scene.buildIndex;
+       
+        Debug.Log("la escena es "+ currentScene);
         if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
         {
          IsGameLoad = true;
@@ -184,6 +190,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 RPC_CreatePlayer();
             }
         }
+        
     }
 
     [PunRPC]
@@ -200,7 +207,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void RPC_CreatePlayer()
     {
         Debug.Log("se creo el jugador");
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player2"), transform.position, Quaternion
-            .identity, 0);
+        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player2"), transform.position, Quaternion
+          //  .identity, 0);
+
+          PhotonNetwork.Instantiate("Player2", transform.position, Quaternion.identity,0);
     }
 }
