@@ -199,7 +199,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     [PunRPC]
     private void RPC_CreatePlayer()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotomPrefabs", "Mage"), transform.position, Quaternion
+        Debug.Log("se creo el jugador");
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player2"), transform.position, Quaternion
             .identity, 0);
     }
 }
