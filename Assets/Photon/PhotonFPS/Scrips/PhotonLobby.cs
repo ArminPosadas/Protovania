@@ -39,7 +39,7 @@ public void OnBattleButtonClicked()
 
 public override void OnJoinRandomFailed(short returnCode, string message)
 {
-    Debug.Log("falo en conectar a la sala");
+    Debug.Log("fallo en conectar a la sala");
     CreateRoom();
 }
 

@@ -44,14 +44,14 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         base.OnEnable();
         PhotonNetwork.AddCallbackTarget(this);
-        //SceneManager.sceneLoaded += OnSceneFinishedLoading;
+        SceneManager.sceneLoaded += OnSceneFinishedLoading;
     }
 
     public override void OnDisable()
     {
         base.OnDisable();
         PhotonNetwork.AddCallbackTarget(this);
-        //SceneManager.sceneLoaded -= OnSceneFinishedLoading;
+        SceneManager.sceneLoaded -= OnSceneFinishedLoading;
     }
 
     void Start()
@@ -93,6 +93,62 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             }
         }
     }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        Debug.Log("se uni al joinedroom");
+        photonPlayers = PhotonNetwork.PlayerList;
+        playersInRooms = photonPlayers.Length;
+        myNumbersInRoom = playersInRooms;
+        PhotonNetwork.NickName = myNumbersInRoom.ToString();
+        if (MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            Debug.Log("Displayer players in room out of max players possible (" + playersInRooms + ": " + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
+            if(playersInRooms > 1)
+            {
+                readyToCount = true;
+            }
+            if (playersInRooms == MultiplayerSettings.multiplayerSettings.maxPlayers)
+            {
+                readyToStart = true;
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    return;
+                }
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+        }
+        else
+        {
+            StartGame();
+        }
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        Debug.Log("A new player has joined the room");
+        photonPlayers = PhotonNetwork.PlayerList;
+        playersInRooms++;
+        if(MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            Debug.Log("Displayer players in room out of max players possible (" + playersInRooms + ": " + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
+            if (playersInRooms > 1)
+            {
+                readyToCount = true;
+            }
+            if (playersInRooms == MultiplayerSettings.multiplayerSettings.maxPlayers)
+            {
+                readyToStart = true;
+                if (!PhotonNetwork.IsMasterClient)
+                {
+                    return;
+                }
+                PhotonNetwork.CurrentRoom.IsOpen=false;
+            }
+        }
+    }
     void StartGame()
     {
         IsGameLoad = true;
@@ -125,7 +181,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             }
             else
             {
-                //RPC_CreatePlayer();
+                RPC_CreatePlayer();
             }
         }
     }
