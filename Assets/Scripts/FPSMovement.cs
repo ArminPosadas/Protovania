@@ -78,4 +78,10 @@ public class FPSMovement : MonoBehaviour
         #endregion
     }
 
+
+    public void Climbing(float velocidad)
+    {
+        moveDirection.y = velocidad;
+    }
+
 }
