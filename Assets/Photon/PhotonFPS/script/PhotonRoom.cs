@@ -209,7 +209,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         Debug.Log("se creo el jugador");
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player2"), new Vector3(0,0.56f,0), Quaternion
             .identity, 0);
+    }
 
-         // PhotonNetwork.Instantiate("Player2", transform.position, Quaternion.identity,0);
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        Destroy(PV.gameObject);
+        Debug.Log(otherPlayer.NickName + " has left the game");
+        playerInGame--;
     }
 }
