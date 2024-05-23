@@ -34,7 +34,7 @@ public class GameSetUp : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.U))
             DisconnectPlayer();
     }
 }

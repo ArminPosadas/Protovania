@@ -54,4 +54,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Photon/PhotonFPS/Scenes/MultiplayerScene.unity
     guid: c7eadefc03a2bd047a191fed4d5b77b9
+  - enabled: 1
+    path: Assets/Photon/PhotonFPS/Scenes/P2_protovania.unity
+    guid: dc7fbf73b1a10814c907ba60d5d8183f
   m_configObjects: {}
