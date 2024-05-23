@@ -18,13 +18,13 @@ public class bulletEnemy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Causar daño al jugador
-            Data playerData = other.GetComponent<Data>();
+            Mage playerData = other.GetComponent<Mage>();
             if (playerData != null)
             {
-                playerData.vidaPlayer -= damage;
+                playerData.health -= damage;
 
                 // Verificar si el jugador ha muerto
-                if (playerData.vidaPlayer <= 0)
+                if (playerData.health <= 0)
                 {
                     Debug.Log("the player is dead.");
                 }
