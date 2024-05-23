@@ -8,6 +8,7 @@ public class GameSetUp : MonoBehaviour
 {
     public static GameSetUp GS;
     public Transform[] spawnPoints;
+    public string lobbySceneName = "LobbyScene"; // Nombre de la escena de la sala 0
 
     private void OnEnable()
     {
@@ -28,7 +29,7 @@ public class GameSetUp : MonoBehaviour
         PhotonNetwork.Disconnect();
         while (PhotonNetwork.IsConnected)
             yield return null;
-        SceneManager.LoadScene(MultiplayerSettings.multiplayerSettings.menuScene);
+        SceneManager.LoadScene(lobbySceneName); // Carga la escena de la sala 0
     }
 
     private void LateUpdate()
@@ -37,3 +38,4 @@ public class GameSetUp : MonoBehaviour
             DisconnectPlayer();
     }
 }
+

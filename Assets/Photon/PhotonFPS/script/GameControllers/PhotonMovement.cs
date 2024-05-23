@@ -2,19 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using System;
 
 public class PhotonMovement : MonoBehaviour
 {
     private PhotonView PV;
     private CharacterController myCC;
-    public float movementSpeed;
-    public float rotationSpeed;
+    public float movementSpeed = 5f;
+    public float rotationSpeed = 700f;
+    public float jumpForce = 5f;
+    public float gravity = -9.81f;
+    private Vector3 velocity;
+    private bool isGrounded;
+
+    public Camera playerCamera; 
 
     private void Start()
     {
         PV = GetComponent<PhotonView>();
         myCC = GetComponent<CharacterController>();
+
+        if (PV.IsMine)
+        {
+            
+            if (playerCamera != null)
+            {
+                playerCamera.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+           
+            if (playerCamera != null)
+            {
+                playerCamera.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void Update()
@@ -23,33 +45,42 @@ public class PhotonMovement : MonoBehaviour
         {
             BasicMovement();
             BasicRotation();
+            ApplyGravity();
+            Jump();
         }
     }
 
-
     void BasicMovement()
     {
-        if (Input.GetKey(KeyCode.W)) 
-        { 
-            myCC.Move(transform.forward * Time.deltaTime * movementSpeed);
-        }
-        if (Input.GetKey(KeyCode.A))
+        isGrounded = myCC.isGrounded;
+        if (isGrounded && velocity.y < 0)
         {
-            myCC.Move(-transform.right * Time.deltaTime * movementSpeed);
+            velocity.y = -2f; 
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            myCC.Move(-transform.forward * Time.deltaTime * movementSpeed);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            myCC.Move(transform.right * Time.deltaTime * movementSpeed);
-        }
+
+        Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+        myCC.Move(move * movementSpeed * Time.deltaTime);
     }
 
     void BasicRotation()
     {
-        float mouseX = Input.GetAxis("MouseX") * Time.deltaTime * rotationSpeed;
-        transform.Rotate(new Vector3(0, mouseX, 0));
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
+        transform.Rotate(Vector3.up * mouseX);
+    }
+
+    void Jump()
+    {
+        if (isGrounded && Input.GetButtonDown("Jump"))
+        {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        }
+    }
+
+    void ApplyGravity()
+    {
+        velocity.y += gravity * Time.deltaTime;
+        myCC.Move(velocity * Time.deltaTime);
     }
 }
+
+

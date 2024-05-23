@@ -905,6 +905,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1212535438}
   - {fileID: 1153325292}
+  lobbySceneName: PUNMainConfig
 --- !u!4 &1914663515
 Transform:
   m_ObjectHideFlags: 0
