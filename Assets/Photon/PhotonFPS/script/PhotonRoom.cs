@@ -176,7 +176,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
 
         currentScene = scene.buildIndex;
-       
+      
         Debug.Log("la escena es "+ currentScene);
         if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
         {
@@ -207,9 +207,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void RPC_CreatePlayer()
     {
         Debug.Log("se creo el jugador");
-        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player2"), transform.position, Quaternion
-          //  .identity, 0);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player2"), new Vector3(0,0.56f,0), Quaternion
+            .identity, 0);
 
-          PhotonNetwork.Instantiate("Player2", transform.position, Quaternion.identity,0);
+         // PhotonNetwork.Instantiate("Player2", transform.position, Quaternion.identity,0);
     }
 }
