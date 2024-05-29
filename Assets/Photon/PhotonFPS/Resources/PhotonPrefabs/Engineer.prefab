@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 1518203167330095633}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &1429158068147146812
 MeshFilter:
@@ -120,12 +120,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3274038312743274164}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d538c4e6d3352274e88f0d5c8ae0b35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 8946567755967923138}
+  health: 20
   walkSpeed: 6
   runSpeed: 12
   jumpPower: 7
@@ -145,6 +146,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac96a4c161001b428c574abb6834548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 8946567755967923138}
+  health: 20
+  walkSpeed: 6
+  runSpeed: 12
+  jumpPower: 7
+  gravity: 10
+  lookSpeed: 2
+  lookXLimit: 45
+  canMove: 1
   buffDuration: 30
   fireRateIncrease: 0.05
   buffAreaPrefab: {fileID: 8016453903165286651, guid: 4234aea227295b64b862243de60510e4, type: 3}

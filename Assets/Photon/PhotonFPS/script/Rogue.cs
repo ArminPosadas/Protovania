@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class RogueClimb : MonoBehaviour
+public class Rogue : FPSMovement
 {
     [Header("References")]
     public Transform orientation;
@@ -36,6 +35,8 @@ public class RogueClimb : MonoBehaviour
 
     private void Update()
     {
+        base.Update();
+        
         WallCheck();
         StateMachine();
 
@@ -48,7 +49,7 @@ public class RogueClimb : MonoBehaviour
         {
             if (!climbing /*&& climbTimer > 0*/) StartClimbing();
 
-            //futuro código, hay que buscar la manera de resetear el climbing cuando esté grounded
+            //futuro cï¿½digo, hay que buscar la manera de resetear el climbing cuando estï¿½ grounded
             /*
             if (climbTimer > 0) climbTimer -= Time.deltaTime;
             if (climbTimer < 0) StopClimbing();
@@ -74,13 +75,19 @@ public class RogueClimb : MonoBehaviour
 
     private void ClimbingMovement()
     {
-        Debug.Log("Debería trepar");
+        Debug.Log("Deberï¿½a trepar");
         //rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
-        trepar.Climbing(climbSpeed);
+        //trepar.Climbing(climbSpeed);
+        Climbing(climbSpeed);
     }
 
     private void StopClimbing()
     {
         climbing = false;
+    }
+
+    public void Climbing(float velocidad)
+    {
+        moveDirection.y = velocidad;
     }
 }

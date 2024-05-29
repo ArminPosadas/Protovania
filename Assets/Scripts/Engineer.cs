@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Engineer : MonoBehaviour
+public class Engineer : FPSMovement
 {
     public float buffDuration = 30f;
     public float fireRateIncrease = 0.05f;
@@ -14,6 +14,8 @@ public class Engineer : MonoBehaviour
 
     void Update()
     {
+        base.Update();
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             ToggleBuff();
@@ -68,7 +70,7 @@ public class Engineer : MonoBehaviour
         if (!isBuffActive) return;
 
         // Verifica si el objeto que entro en la zona es un aliado usando la etiqueta
-        if (other.CompareTag("Ally"))
+        if (other.CompareTag("Player"))
         {
             // Aplica el buff al aliado
             Gun allyGun = other.GetComponent<Gun>();
