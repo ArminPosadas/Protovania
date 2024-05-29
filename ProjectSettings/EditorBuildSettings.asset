@@ -48,12 +48,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/SlotCar-Scene.unity
     guid: 711b38c07f2cf904f81b3422c67f1825
-  - enabled: 1
+  - enabled: 0
     path: Assets/Photon/PhotonFPS/Scenes/PUNMainConfig.unity
     guid: 30833210309ff9346bcc323f37059e3a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Photon/PhotonFPS/Scenes/MultiplayerScene.unity
     guid: c7eadefc03a2bd047a191fed4d5b77b9
+  - enabled: 1
+    path: Assets/Photon/PhotonFPS/Scenes/Loading.unity
+    guid: cf0dab059b60edc45acfd869daa14bae
+  - enabled: 1
+    path: Assets/Photon/PhotonFPS/Scenes/Main.unity
+    guid: 66c53899baad8ab439fd9e1e947f16ac
   - enabled: 1
     path: Assets/Photon/PhotonFPS/Scenes/P2_protovania.unity
     guid: dc7fbf73b1a10814c907ba60d5d8183f
