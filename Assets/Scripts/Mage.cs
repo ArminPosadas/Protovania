@@ -8,6 +8,7 @@ public class Mage : FPSMovement
     public LayerMask grabbableLayer; // objects that can be grabbed
     private Transform grabbedObject; // Reference to grabbed object, if any Indicates whether the player is grabbing an object
     private bool isGrabbing = false;  
+    
 
     void Update()
     {
@@ -34,8 +35,10 @@ public class Mage : FPSMovement
     {
         // Launch a beam from the camera forward to detect grabble objects
         RaycastHit hit;
+        Debug.Log("entro a la funcion try");
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, grabbableLayer))
         {
+            Debug.Log("entro al raycast");
             // Check if the hit object has a Rigidbody component
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             if (rb != null)

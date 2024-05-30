@@ -78,7 +78,7 @@ public class Rogue : FPSMovement
         Debug.Log("Deber�a trepar");
         //rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
         //trepar.Climbing(climbSpeed);
-        Climbing(climbSpeed);
+       // Climbing(climbSpeed);
     }
 
     private void StopClimbing()
@@ -86,8 +86,9 @@ public class Rogue : FPSMovement
         climbing = false;
     }
 
-    public void Climbing(float velocidad)
+    /*public void Climbing(float velocidad)
     {
         moveDirection.y = velocidad;
     }
+    */
 }

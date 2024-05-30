@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3e6be509eb46992478aa6f3bb764d259, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 9152955919846285453}
   - component: {fileID: 8801407005852530723}
   - component: {fileID: 2123109230865162252}
-  - component: {fileID: 3554103799853926380}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -223,7 +222,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3e6be509eb46992478aa6f3bb764d259, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -327,20 +326,6 @@ MonoBehaviour:
   jumpForce: 5
   gravity: -9.81
   playerCamera: {fileID: 5903949891034127345}
---- !u!114 &3554103799853926380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4480117090705727541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afaa9ffa291dc164197d2dcdf8780670, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myCharacter: {fileID: 0}
-  characterValue: 0
 --- !u!1 &7940679548087536000
 GameObject:
   m_ObjectHideFlags: 0
