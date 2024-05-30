@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  rotationSpeed: 700
+  rotationSpeed: 300
   jumpForce: 5
   gravity: -9.81
   health: 20

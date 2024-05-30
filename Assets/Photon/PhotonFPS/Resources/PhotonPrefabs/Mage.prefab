@@ -294,13 +294,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f9432da835fe34fb8c0f15c4fe9b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 25
-  rotationSpeed: 700
-  jumpForce: 5
+  movementSpeed: 6
+  rotationSpeed: 300
+  jumpForce: 2
   gravity: -9.81
   health: -16
   playerCamera: {fileID: 4827717495087285933}
-  grabDistance: 4
+  grabDistance: 10
   grabbableLayer:
     serializedVersion: 2
     m_Bits: 128

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1429158068147146812}
   - component: {fileID: 143936065416107041}
   - component: {fileID: 499196311879480167}
-  - component: {fileID: 7408592093377702365}
   - component: {fileID: 7336816541596618192}
   - component: {fileID: 4189293251675528786}
   - component: {fileID: 5014834322828286617}
@@ -115,24 +114,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7408592093377702365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3274038312743274164}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d538c4e6d3352274e88f0d5c8ae0b35c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 5
-  rotationSpeed: 700
-  jumpForce: 5
-  gravity: 10
-  health: 20
-  playerCamera: {fileID: 8946567755967923138}
 --- !u!114 &7336816541596618192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  rotationSpeed: 700
+  rotationSpeed: 300
   jumpForce: 5
   gravity: -9.81
   health: 20
