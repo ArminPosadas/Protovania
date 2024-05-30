@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7310399494146044427}
   - component: {fileID: 5362605548992631326}
   - component: {fileID: -7813247274473942492}
+  - component: {fileID: 8323051312213204539}
   m_Layer: 0
   m_Name: enemy - mele
   m_TagString: Untagged
@@ -144,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f61d34c037c442b2bebadc0649585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objetivo: {fileID: 0}
+  objetivo: {fileID: 393424769948696272, guid: 1999ced6bba83854a82a413677867829, type: 3}
   velocidad: 5
   IA: {fileID: 7310399494146044427}
 --- !u!114 &-7813247274473942492
@@ -160,4 +161,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 4
-  Player: {fileID: 0}
+  Player: {fileID: 6327685026822441586, guid: 1999ced6bba83854a82a413677867829, type: 3}
+--- !u!114 &8323051312213204539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687708976677951508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
