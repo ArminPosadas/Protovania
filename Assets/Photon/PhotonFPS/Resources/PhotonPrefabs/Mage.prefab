@@ -298,7 +298,7 @@ MonoBehaviour:
   rotationSpeed: 300
   jumpForce: 2
   gravity: -9.81
-  health: -16
+  health: -28
   playerCamera: {fileID: 4827717495087285933}
   grabDistance: 10
   grabbableLayer:

@@ -16,6 +16,8 @@ public class Enemyfollowing : MonoBehaviour
     {
         IA.speed = velocidad;
         IA.SetDestination(objetivo.position);
+
+        objetivo = GameObject.Find("Mage(Clone)").transform;
     }
 
 }

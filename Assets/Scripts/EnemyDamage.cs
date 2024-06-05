@@ -11,6 +11,7 @@ public class EnemyDamage : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("le hiso daño");
             Player.GetComponent<Mage>().health -= damage;
         }
     }
