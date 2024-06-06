@@ -127,10 +127,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a704f69c6c43bd1439659f677e623f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCC: {fileID: 3118034980898700145}
   movementSpeed: 5
-  rotationSpeed: 300
-  jumpForce: 5
+  mouseSensitivity: 100
+  jumpForce: 8
   gravity: -9.81
+  velocity: {x: 0, y: 0, z: 0}
   health: 20
   playerCamera: {fileID: 9170036252211616859}
   orientation: {fileID: 2753116734461519227}
@@ -140,10 +142,10 @@ MonoBehaviour:
     m_Bits: 32768
   climbSpeed: 0.5
   maxClimbTime: 0.75
-  climbTimer: 10
-  detectionLenght: 0.7
+  climbTimer: 0
+  detectionLenght: 0
   sphereCastRadius: 0.25
-  maxWallLookAngle: 30
+  maxWallLookAngle: 50
 --- !u!54 &8960573154344533462
 Rigidbody:
   m_ObjectHideFlags: 0

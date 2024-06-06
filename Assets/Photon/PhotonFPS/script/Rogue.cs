@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +36,7 @@ public class Rogue : FPSMovement
     private void Update()
     {
         base.Update();
-        
+
         WallCheck();
         StateMachine();
 
@@ -45,8 +45,9 @@ public class Rogue : FPSMovement
 
     private void StateMachine()
     {
-        if(wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle)
+        if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle)
         {
+            Debug.Log("detecto pared");
             if (!climbing /*&& climbTimer > 0*/) StartClimbing();
 
             //futuro c�digo, hay que buscar la manera de resetear el climbing cuando est� grounded
@@ -65,6 +66,7 @@ public class Rogue : FPSMovement
     private void WallCheck()
     {
         wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLenght, whatIsWall);
+        Debug.Log(wallFront);
         wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
     }
 
@@ -75,10 +77,10 @@ public class Rogue : FPSMovement
 
     private void ClimbingMovement()
     {
-        Debug.Log("Deber�a trepar");
+        Debug.Log("Deberia trepar");
         //rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
         //trepar.Climbing(climbSpeed);
-       // Climbing(climbSpeed);
+        // Climbing(climbSpeed);
     }
 
     private void StopClimbing()
@@ -92,3 +94,4 @@ public class Rogue : FPSMovement
     }
     */
 }
+
