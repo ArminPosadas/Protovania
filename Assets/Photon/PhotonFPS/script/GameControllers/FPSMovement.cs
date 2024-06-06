@@ -2,40 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CharacterController))]
-
 public class FPSMovement : MonoBehaviour
 {
     private PhotonView PV;
-    private CharacterController myCC;
+    public CharacterController myCC;
     public float movementSpeed = 5f;
-    public float rotationSpeed = 700f;
+    public float mouseSensitivity = 100f;
     public float jumpForce = 5f;
     public float gravity = -9.81f;
-    private Vector3 velocity;
+    public Vector3 velocity;
     private bool isGrounded;
     public int health = 20;
 
     public Camera playerCamera;
+    private float xRotation = 0f;
 
-    private void Start()
+    public void Start()
     {
         PV = GetComponent<PhotonView>();
         myCC = GetComponent<CharacterController>();
 
         if (PV.IsMine)
         {
-
             if (playerCamera != null)
             {
                 playerCamera.gameObject.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
         else
         {
-
             if (playerCamera != null)
             {
                 playerCamera.gameObject.SetActive(false);
@@ -68,7 +66,13 @@ public class FPSMovement : MonoBehaviour
 
     void BasicRotation()
     {
-        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -85,6 +89,6 @@ public class FPSMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         myCC.Move(velocity * Time.deltaTime);
     }
-
-
 }
+
+

@@ -6,18 +6,17 @@ public class Rogue : FPSMovement
 {
     [Header("References")]
     public Transform orientation;
-    public Rigidbody rb;
     public LayerMask whatIsWall;
 
     [Header("Climbing")]
     public float climbSpeed;
     public float maxClimbTime;
-    public float climbTimer;
+    private float climbTimer;
 
     private bool climbing;
 
     [Header("Detection")]
-    public float detectionLenght;
+    public float detectionLength;
     public float sphereCastRadius;
     public float maxWallLookAngle;
     private float wallLookAngle;
@@ -25,18 +24,15 @@ public class Rogue : FPSMovement
     private RaycastHit frontWallHit;
     private bool wallFront;
 
-    private FPSMovement trepar;
-
-    void Awake()
+    private void Start()
     {
-        trepar = GetComponent<FPSMovement>();
+        base.Start();
     }
-
 
     private void Update()
     {
         base.Update();
-        
+
         WallCheck();
         StateMachine();
 
@@ -45,17 +41,10 @@ public class Rogue : FPSMovement
 
     private void StateMachine()
     {
-        if(wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle)
+        if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle)
         {
-            if (!climbing /*&& climbTimer > 0*/) StartClimbing();
-
-            //futuro c�digo, hay que buscar la manera de resetear el climbing cuando est� grounded
-            /*
-            if (climbTimer > 0) climbTimer -= Time.deltaTime;
-            if (climbTimer < 0) StopClimbing();
-            */
+            if (!climbing && climbTimer > 0) StartClimbing();
         }
-
         else
         {
             if (climbing) StopClimbing();
@@ -64,31 +53,36 @@ public class Rogue : FPSMovement
 
     private void WallCheck()
     {
-        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLenght, whatIsWall);
-        wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
+        if (wallFront)
+        {
+            wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+        }
     }
 
     private void StartClimbing()
     {
         climbing = true;
+        climbTimer = maxClimbTime;
     }
 
     private void ClimbingMovement()
     {
-        Debug.Log("Deber�a trepar");
-        //rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
-        //trepar.Climbing(climbSpeed);
-       // Climbing(climbSpeed);
+        climbTimer -= Time.deltaTime;
+        if (climbTimer <= 0)
+        {
+            StopClimbing();
+            return;
+        }
+
+        velocity.y = climbSpeed; 
+        myCC.Move(velocity * Time.deltaTime);
     }
 
     private void StopClimbing()
     {
         climbing = false;
+        velocity.y = 0; 
     }
-
-    /*public void Climbing(float velocidad)
-    {
-        moveDirection.y = velocidad;
-    }
-    */
 }
+
