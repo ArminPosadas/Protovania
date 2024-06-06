@@ -90,5 +90,3 @@ public class FPSMovement : MonoBehaviour
         myCC.Move(velocity * Time.deltaTime);
     }
 }
-
-
