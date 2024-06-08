@@ -981,6 +981,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2521415553096695342, guid: 1999ced6bba83854a82a413677867829, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6327685026822441586, guid: 1999ced6bba83854a82a413677867829, type: 3}
       propertyPath: m_Name
       value: Mage
