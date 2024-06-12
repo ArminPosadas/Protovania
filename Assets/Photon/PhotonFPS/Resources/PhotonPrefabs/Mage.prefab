@@ -294,10 +294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f9432da835fe34fb8c0f15c4fe9b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCC: {fileID: 0}
   movementSpeed: 6
-  rotationSpeed: 300
+  mouseSensitivity: 100
   jumpForce: 2
   gravity: -9.81
+  velocity: {x: 0, y: 0, z: 0}
   health: -28
   playerCamera: {fileID: 4827717495087285933}
   grabDistance: 10
