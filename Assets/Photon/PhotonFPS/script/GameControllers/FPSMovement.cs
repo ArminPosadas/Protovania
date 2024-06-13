@@ -92,4 +92,11 @@ public class FPSMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         myCC.Move(velocity * Time.deltaTime);
     }
+
+    [PunRPC]
+    public void TeleportPlayer(Vector3 position)
+    {
+        // Teleport the player to the specified position
+        transform.position = position;
+    }
 }

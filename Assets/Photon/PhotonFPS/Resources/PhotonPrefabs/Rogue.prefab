@@ -131,7 +131,7 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 8
   mouseSensitivity: 100
-  jumpForce: 8
+  jumpForce: 2
   gravity: -9.81
   velocity: {x: 0, y: 0, z: 0}
   health: 20
@@ -140,12 +140,12 @@ MonoBehaviour:
   rb: {fileID: 8960573154344533462}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 0
-  climbSpeed: 0
-  maxClimbTime: 0
-  detectionLength: 0
-  sphereCastRadius: 0
-  maxWallLookAngle: 0
+    m_Bits: 32768
+  climbSpeed: 1
+  maxClimbTime: 5
+  detectionLength: 4
+  sphereCastRadius: 4
+  maxWallLookAngle: 90
 --- !u!54 &8960573154344533462
 Rigidbody:
   m_ObjectHideFlags: 0

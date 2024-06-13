@@ -323,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCC: {fileID: 8319711829504967803}
   movementSpeed: 5
+  sprintSpeed: 8
   mouseSensitivity: 100
   jumpForce: 5
   gravity: -9.81
