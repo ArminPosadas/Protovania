@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyLife : MonoBehaviour
 {
+
     public int maxHealth = 10; // Maximum health of the enemy
-    private int currentHealth;
+    public int currentHealth;
     private GameObject puerta;
 
     private destroyDoor2 abrir;
@@ -19,11 +20,14 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log(currentHealth);
+        //   Debug.Log(currentHealth + "EnemyLife");
+
         currentHealth -= damage; // Reduce health by damage amount
         if (currentHealth <= 0)
         {
-            abrir.vivos2 = false;
+            Debug.Log("se murio el y va desactivar la puerta");
+            abrir.vivos1 = false;
+
             Dead();
         }
     }
@@ -34,3 +38,4 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject); // Destroy the enemy GameObject
     }
 }
+
