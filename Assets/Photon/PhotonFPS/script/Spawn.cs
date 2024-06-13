@@ -38,6 +38,9 @@ public class Spawn : MonoBehaviour
             case "exit":
                 HandleExit();
                 break;
+            case "meleetest":
+                ChangeSceneToMeleeTest();
+                break;
             default:
                 Debug.Log("no pasa nada");
                 break;
@@ -61,7 +64,20 @@ public class Spawn : MonoBehaviour
         SceneTransitionManager sceneManager = FindObjectOfType<SceneTransitionManager>();
         if (sceneManager != null)
         {
-            sceneManager.ChangeScene("Main"); 
+            sceneManager.ChangeScene("Main");
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager no encontrado en la escena.");
+        }
+    }
+
+    private void ChangeSceneToMeleeTest()
+    {
+        SceneTransitionManager sceneManager = FindObjectOfType<SceneTransitionManager>();
+        if (sceneManager != null)
+        {
+            sceneManager.ChangeScene("MeleeTest");
         }
         else
         {
@@ -74,7 +90,5 @@ public class Spawn : MonoBehaviour
         return selectedPrefab;
     }
 }
-
-
 
 
