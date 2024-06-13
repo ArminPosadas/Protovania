@@ -9,6 +9,7 @@ public class FPSMovement : MonoBehaviour
     private PhotonView PV;
     public CharacterController myCC;
     public float movementSpeed = 5f;
+    public float sprintSpeed = 8f;
     public float mouseSensitivity = 100f;
     public float jumpForce = 5f;
     public float gravity = -9.81f;
@@ -60,8 +61,10 @@ public class FPSMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : movementSpeed; 
+
         Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-        myCC.Move(move * movementSpeed * Time.deltaTime);
+        myCC.Move(move * currentSpeed * Time.deltaTime); 
     }
 
     void BasicRotation()

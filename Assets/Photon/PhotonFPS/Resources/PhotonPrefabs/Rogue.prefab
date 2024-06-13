@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCC: {fileID: 3118034980898700145}
   movementSpeed: 5
+  sprintSpeed: 8
   mouseSensitivity: 100
   jumpForce: 8
   gravity: -9.81
@@ -139,13 +140,12 @@ MonoBehaviour:
   rb: {fileID: 8960573154344533462}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 32768
-  climbSpeed: 0.5
-  maxClimbTime: 0.75
-  climbTimer: 0
-  detectionLenght: 0
-  sphereCastRadius: 0.25
-  maxWallLookAngle: 50
+    m_Bits: 0
+  climbSpeed: 0
+  maxClimbTime: 0
+  detectionLength: 0
+  sphereCastRadius: 0
+  maxWallLookAngle: 0
 --- !u!54 &8960573154344533462
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 2997333173626032911}
   - {fileID: 3558470364000893615}
   sceneViewId: 0
   InstantiationId: 0
