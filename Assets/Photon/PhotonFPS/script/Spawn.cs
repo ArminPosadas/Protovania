@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Spawn : MonoBehaviour
 {
     public Canvas mainCanvas;
+    private static string selectedPrefab;
 
     public void OnButtonClic(string buttonType)
     {
@@ -16,19 +17,23 @@ public class Spawn : MonoBehaviour
         {
             case "clasemage":
                 HandleClassSelection();
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Mage"), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
+                selectedPrefab = "Mage";
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", selectedPrefab), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
                 break;
             case "claserogue":
                 HandleClassSelection();
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Rogue"), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
+                selectedPrefab = "Rogue";
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", selectedPrefab), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
                 break;
             case "claseengineer":
                 HandleClassSelection();
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Engineer"), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
+                selectedPrefab = "Engineer";
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", selectedPrefab), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
                 break;
             case "clasemelee":
                 HandleClassSelection();
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player2"), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
+                selectedPrefab = "Player2";
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", selectedPrefab), new Vector3(4, 80.81f, -84.5f), Quaternion.identity, 0);
                 break;
             case "exit":
                 HandleExit();
@@ -53,10 +58,23 @@ public class Spawn : MonoBehaviour
 
     private void HandleExit()
     {
+        SceneTransitionManager sceneManager = FindObjectOfType<SceneTransitionManager>();
+        if (sceneManager != null)
+        {
+            sceneManager.ChangeScene("Main"); 
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager no encontrado en la escena.");
+        }
+    }
 
-        SceneManager.LoadScene("Main");
+    public static string GetSelectedPrefab()
+    {
+        return selectedPrefab;
     }
 }
+
 
 
 

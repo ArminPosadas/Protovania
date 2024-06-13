@@ -1081,6 +1081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 690912350}
   - component: {fileID: 690912351}
+  - component: {fileID: 690912352}
   m_Layer: 0
   m_Name: GameSetUp
   m_TagString: Untagged
@@ -1116,6 +1117,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 506558244}
+--- !u!114 &690912352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690912347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e3009569a7fd2438a6a82ae5ce5ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &754234449
 GameObject:
   m_ObjectHideFlags: 0
