@@ -126,10 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac96a4c161001b428c574abb6834548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCC: {fileID: 0}
   movementSpeed: 5
-  rotationSpeed: 300
+  sprintSpeed: 10
+  mouseSensitivity: 100
   jumpForce: 5
   gravity: -9.81
+  velocity: {x: 0, y: 0, z: 0}
   health: 20
   playerCamera: {fileID: 8946567755967923138}
   buffDuration: 30

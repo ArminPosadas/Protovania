@@ -44,6 +44,8 @@ MonoBehaviour:
   - RPC_AddCharacter
   - RPC_StartClimbing
   - RPC_StopClimbing
+  - RPC_Jump
+  - DisableButtonForOthers
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
