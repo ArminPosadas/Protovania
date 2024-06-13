@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Rogue : FPSMovement
+public class Rogue : FPSMovement, IPunObservable
 {
     [Header("References")]
     public Transform orientation;
@@ -12,12 +13,12 @@ public class Rogue : FPSMovement
     [Header("Climbing")]
     public float climbSpeed;
     public float maxClimbTime;
-    public float climbTimer;
+    private float climbTimer;
 
     private bool climbing;
 
     [Header("Detection")]
-    public float detectionLenght;
+    public float detectionLength;
     public float sphereCastRadius;
     public float maxWallLookAngle;
     private float wallLookAngle;
@@ -25,73 +26,115 @@ public class Rogue : FPSMovement
     private RaycastHit frontWallHit;
     private bool wallFront;
 
-    private FPSMovement trepar;
+    private PhotonView photonView;
 
     void Awake()
     {
-        trepar = GetComponent<FPSMovement>();
+        photonView = GetComponent<PhotonView>();
+        Debug.Log("Awake: Componentes inicializados");
     }
-
 
     private void Update()
     {
         base.Update();
 
-        WallCheck();
-        StateMachine();
+        if (photonView.IsMine)
+        {
+            Debug.Log("Update: PhotonView es mío");
+            WallCheck();
+            StateMachine();
 
-        if (climbing) ClimbingMovement();
+            if (climbing)
+            {
+                ClimbingMovement();
+            }
+        }
     }
 
     private void StateMachine()
     {
+        Debug.Log($"StateMachine: wallFront={wallFront}, KeyW={Input.GetKey(KeyCode.W)}, wallLookAngle={wallLookAngle}");
         if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle)
         {
-            Debug.Log("detecto pared");
-            if (!climbing /*&& climbTimer > 0*/) StartClimbing();
-
-            //futuro c�digo, hay que buscar la manera de resetear el climbing cuando est� grounded
-            /*
-            if (climbTimer > 0) climbTimer -= Time.deltaTime;
-            if (climbTimer < 0) StopClimbing();
-            */
+            Debug.Log("StateMachine: Detecto pared y comenzando a escalar");
+            if (!climbing)
+                StartClimbing();
         }
-
         else
         {
-            if (climbing) StopClimbing();
+            if (climbing)
+                StopClimbing();
         }
     }
 
     private void WallCheck()
     {
-        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLenght, whatIsWall);
-        Debug.Log(wallFront);
-        wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
+        Debug.Log($"WallCheck: wallFront={wallFront}");
+        if (wallFront)
+        {
+            wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+            Debug.Log($"WallCheck: wallLookAngle={wallLookAngle}");
+        }
     }
 
     private void StartClimbing()
     {
         climbing = true;
+        climbTimer = maxClimbTime;
+        Debug.Log("StartClimbing: Iniciando escalada");
+        photonView.RPC("RPC_StartClimbing", RpcTarget.Others);
     }
 
     private void ClimbingMovement()
     {
-        Debug.Log("Deberia trepar");
-        //rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
-        //trepar.Climbing(climbSpeed);
-        // Climbing(climbSpeed);
+        Debug.Log("ClimbingMovement: Trepando");
+        rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
+
+        climbTimer -= Time.deltaTime;
+        if (climbTimer <= 0)
+        {
+            StopClimbing();
+        }
     }
 
     private void StopClimbing()
     {
         climbing = false;
+        Debug.Log("StopClimbing: Deteniendo escalada");
+        photonView.RPC("RPC_StopClimbing", RpcTarget.Others);
     }
 
-    /*public void Climbing(float velocidad)
+    [PunRPC]
+    private void RPC_StartClimbing()
     {
-        moveDirection.y = velocidad;
+        climbing = true;
+        Debug.Log("RPC_StartClimbing: Iniciado en otro cliente");
     }
-    */
+
+    [PunRPC]
+    private void RPC_StopClimbing()
+    {
+        climbing = false;
+        Debug.Log("RPC_StopClimbing: Detenido en otro cliente");
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // Enviar datos
+            stream.SendNext(climbing);
+        }
+        else
+        {
+            // Recibir datos
+            climbing = (bool)stream.ReceiveNext();
+        }
+    }
 }
+
+
+
+
 
