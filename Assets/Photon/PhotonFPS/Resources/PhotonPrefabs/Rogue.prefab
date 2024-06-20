@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2045698629020943935}
   - component: {fileID: 3118034980898700145}
   - component: {fileID: 2997333173626032911}
-  - component: {fileID: 8960573154344533462}
   - component: {fileID: 6964260911921118073}
   - component: {fileID: 3558470364000893615}
   - component: {fileID: 7621680878974796686}
@@ -140,33 +139,9 @@ MonoBehaviour:
   Cam: {fileID: 9170036252211616859}
   climbSpeed: 25
   wallDetectionDistance: 1
---- !u!54 &8960573154344533462
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687166486437729749}
-  serializedVersion: 4
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  edgeDetectionDistance: 1
+  jumpForce: 2
+  wallTag: whatIsWall
 --- !u!114 &6964260911921118073
 MonoBehaviour:
   m_ObjectHideFlags: 0
