@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8960573154344533462}
   - component: {fileID: 6964260911921118073}
   - component: {fileID: 3558470364000893615}
+  - component: {fileID: 7621680878974796686}
   m_Layer: 0
   m_Name: Rogue
   m_TagString: Player
@@ -136,16 +137,9 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   health: 20
   playerCamera: {fileID: 9170036252211616859}
-  orientation: {fileID: 2753116734461519227}
-  rb: {fileID: 8960573154344533462}
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 32768
-  climbSpeed: 1
-  maxClimbTime: 5
-  detectionLength: 4
-  sphereCastRadius: 4
-  maxWallLookAngle: 90
+  Cam: {fileID: 9170036252211616859}
+  climbSpeed: 5
+  wallDetectionDistance: 1
 --- !u!54 &8960573154344533462
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -168,7 +162,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 0
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -192,7 +186,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2997333173626032911}
   - {fileID: 3558470364000893615}
   sceneViewId: 0
   InstantiationId: 0
@@ -213,6 +206,29 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!136 &7621680878974796686
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687166486437729749}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3313624365113149731
 GameObject:
   m_ObjectHideFlags: 0

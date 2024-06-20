@@ -3,34 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Rogue : FPSMovement, IPunObservable
+public class Rogue : FPSMovement
 {
-    [Header("References")]
-    public Transform orientation;
-    public Rigidbody rb;
-    public LayerMask whatIsWall;
-
-    [Header("Climbing")]
-    public float climbSpeed;
-    public float maxClimbTime;
-    private float climbTimer;
-
-    private bool climbing;
-
-    [Header("Detection")]
-    public float detectionLength;
-    public float sphereCastRadius;
-    public float maxWallLookAngle;
-    private float wallLookAngle;
-
-    private RaycastHit frontWallHit;
-    private bool wallFront;
+    public Camera Cam;
+    public float climbSpeed = 5f; // Velocidad de escalada
+    public float wallDetectionDistance = 1f; // Distancia para detectar paredes
 
     private PhotonView photonView;
+    private Rigidbody rb;
+    private bool isClimbing = false;
 
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        rb = GetComponent<Rigidbody>();
         Debug.Log("Awake: Componentes inicializados");
     }
 
@@ -41,100 +27,74 @@ public class Rogue : FPSMovement, IPunObservable
         if (photonView.IsMine)
         {
             Debug.Log("Update: PhotonView es mío");
-            WallCheck();
-            StateMachine();
-
-            if (climbing)
-            {
-                ClimbingMovement();
-            }
+            HandleClimbing();
         }
     }
 
-    private void StateMachine()
+    private void HandleClimbing()
     {
-        Debug.Log($"StateMachine: wallFront={wallFront}, KeyW={Input.GetKey(KeyCode.W)}, wallLookAngle={wallLookAngle}");
-        if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle)
+        bool nearWall = IsNearWall();
+        Debug.Log("HandleClimbing: nearWall = " + nearWall);
+
+        if (nearWall && Input.GetKey(KeyCode.W)) // Presiona 'W' para escalar
         {
-            Debug.Log("StateMachine: Detecto pared y comenzando a escalar");
-            if (!climbing)
-                StartClimbing();
+            StartClimbing();
         }
         else
         {
-            if (climbing)
-                StopClimbing();
+            StopClimbing();
+        }
+
+        if (isClimbing)
+        {
+            Climb();
         }
     }
 
-    private void WallCheck()
+    private bool IsNearWall()
     {
-        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
-        Debug.Log($"WallCheck: wallFront={wallFront}");
-        if (wallFront)
+        // Lanzar un rayo al frente del personaje para detectar la pared
+        RaycastHit hit;
+        Vector3 origin = transform.position;
+        Vector3 direction = transform.forward;
+        bool hitDetected = Physics.Raycast(origin, direction, out hit, wallDetectionDistance);
+
+        Debug.DrawRay(origin, direction * wallDetectionDistance, hitDetected ? Color.green : Color.red);
+
+        if (hitDetected)
         {
-            wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
-            Debug.Log($"WallCheck: wallLookAngle={wallLookAngle}");
+            Debug.Log("IsNearWall: Wall detected at distance " + hit.distance);
+            return true;
         }
+
+        return false;
     }
 
     private void StartClimbing()
     {
-        climbing = true;
-        climbTimer = maxClimbTime;
-        Debug.Log("StartClimbing: Iniciando escalada");
-        photonView.RPC("RPC_StartClimbing", RpcTarget.Others);
-    }
-
-    private void ClimbingMovement()
-    {
-        Debug.Log("ClimbingMovement: Trepando");
-        rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
-
-        climbTimer -= Time.deltaTime;
-        if (climbTimer <= 0)
+        if (!isClimbing)
         {
-            StopClimbing();
+            Debug.Log("StartClimbing: Starting to climb");
+            isClimbing = true;
+            rb.useGravity = false; // Desactivar gravedad mientras escalamos
         }
     }
 
     private void StopClimbing()
     {
-        climbing = false;
-        Debug.Log("StopClimbing: Deteniendo escalada");
-        photonView.RPC("RPC_StopClimbing", RpcTarget.Others);
-    }
-
-    [PunRPC]
-    private void RPC_StartClimbing()
-    {
-        climbing = true;
-        Debug.Log("RPC_StartClimbing: Iniciado en otro cliente");
-    }
-
-    [PunRPC]
-    private void RPC_StopClimbing()
-    {
-        climbing = false;
-        Debug.Log("RPC_StopClimbing: Detenido en otro cliente");
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
+        if (isClimbing)
         {
-            // Enviar datos
-            stream.SendNext(climbing);
+            Debug.Log("StopClimbing: Stopping climbing");
+            isClimbing = false;
+            rb.useGravity = true; // Reactivar gravedad cuando dejemos de escalar
         }
-        else
-        {
-            // Recibir datos
-            climbing = (bool)stream.ReceiveNext();
-        }
+    }
+
+    private void Climb()
+    {
+        // Mover el personaje hacia arriba
+        rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
+        Debug.Log("Climb: Climbing with velocity " + rb.velocity);
     }
 }
-
-
-
-
 

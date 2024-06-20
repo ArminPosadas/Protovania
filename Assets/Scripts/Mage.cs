@@ -9,7 +9,7 @@ public class Mage : FPSMovement
     private Transform grabbedObject; 
     private bool isGrabbing = false;
 
-    void Update()
+       private void Update()
     {
         base.Update();
 
