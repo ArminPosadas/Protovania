@@ -132,13 +132,13 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 8
   mouseSensitivity: 100
-  jumpForce: 5
+  jumpForce: 2
   gravity: -9.81
   velocity: {x: 0, y: 0, z: 0}
   health: 20
   playerCamera: {fileID: 9170036252211616859}
   Cam: {fileID: 9170036252211616859}
-  climbSpeed: 5
+  climbSpeed: 25
   wallDetectionDistance: 1
 --- !u!54 &8960573154344533462
 Rigidbody:

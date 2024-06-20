@@ -6,8 +6,8 @@ using Photon.Pun;
 public class Rogue : FPSMovement
 {
     public Camera Cam;
-    public float climbSpeed = 5f; // Velocidad de escalada
-    public float wallDetectionDistance = 1f; // Distancia para detectar paredes
+    public float climbSpeed = 5f;
+    public float wallDetectionDistance = 1f;
 
     private PhotonView photonView;
     private Rigidbody rb;
@@ -18,6 +18,10 @@ public class Rogue : FPSMovement
         photonView = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody>();
         Debug.Log("Awake: Componentes inicializados");
+
+
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
     private void Update()
@@ -26,7 +30,6 @@ public class Rogue : FPSMovement
 
         if (photonView.IsMine)
         {
-            Debug.Log("Update: PhotonView es mío");
             HandleClimbing();
         }
     }
@@ -34,9 +37,8 @@ public class Rogue : FPSMovement
     private void HandleClimbing()
     {
         bool nearWall = IsNearWall();
-        Debug.Log("HandleClimbing: nearWall = " + nearWall);
 
-        if (nearWall && Input.GetKey(KeyCode.W)) // Presiona 'W' para escalar
+        if (nearWall && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
         {
             StartClimbing();
         }
@@ -53,7 +55,7 @@ public class Rogue : FPSMovement
 
     private bool IsNearWall()
     {
-        // Lanzar un rayo al frente del personaje para detectar la pared
+
         RaycastHit hit;
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
@@ -61,22 +63,16 @@ public class Rogue : FPSMovement
 
         Debug.DrawRay(origin, direction * wallDetectionDistance, hitDetected ? Color.green : Color.red);
 
-        if (hitDetected)
-        {
-            Debug.Log("IsNearWall: Wall detected at distance " + hit.distance);
-            return true;
-        }
-
-        return false;
+        return hitDetected;
     }
 
     private void StartClimbing()
     {
         if (!isClimbing)
         {
-            Debug.Log("StartClimbing: Starting to climb");
             isClimbing = true;
-            rb.useGravity = false; // Desactivar gravedad mientras escalamos
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -84,17 +80,26 @@ public class Rogue : FPSMovement
     {
         if (isClimbing)
         {
-            Debug.Log("StopClimbing: Stopping climbing");
             isClimbing = false;
-            rb.useGravity = true; // Reactivar gravedad cuando dejemos de escalar
+            rb.useGravity = true;
         }
     }
 
     private void Climb()
     {
-        // Mover el personaje hacia arriba
-        rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
-        Debug.Log("Climb: Climbing with velocity " + rb.velocity);
+        float verticalInput = 0f;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            verticalInput = 1f; // Subir
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            verticalInput = -1f; // Bajar
+        }
+
+        Vector3 climbMovement = new Vector3(0, verticalInput * climbSpeed * Time.deltaTime, 0);
+        transform.Translate(climbMovement);
     }
 }
 
