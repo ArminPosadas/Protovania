@@ -9,6 +9,7 @@ public class Rogue : FPSMovement
     public float climbSpeed = 5f; // velocidad de escalada
     public float wallDetectionDistance = 1f; // distancia de paredes
     public float edgeDetectionDistance = 1f; //detectar borde
+    public float jumpForce = 5f; // fuerza de salto al llegar al tope
     public string wallTag = "whatIsWall"; // etiqueta de la pared
 
     private PhotonView photonView;

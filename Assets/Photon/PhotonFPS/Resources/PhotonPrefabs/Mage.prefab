@@ -146,7 +146,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6681729653985212967}
-  - component: {fileID: 4572066079261339041}
   m_Layer: 0
   m_Name: bulletSpawnPoint
   m_TagString: Untagged
@@ -169,28 +168,6 @@ Transform:
   m_Father: {fileID: 1505216424945697461}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &4572066079261339041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3763897095847104271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &6327685026822441586
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +359,6 @@ GameObject:
   - component: {fileID: 2643028531601594027}
   - component: {fileID: 4788698798724671597}
   - component: {fileID: 7936772543778085438}
-  - component: {fileID: 4052237439623468899}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -495,25 +471,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000006, y: 0.17465812, z: 1.0000017}
   m_Center: {x: 0.000000074505806, y: 0.081832826, z: -0.0000020116563}
---- !u!114 &4052237439623468899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6647896641370997270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
