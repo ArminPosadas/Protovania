@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: ec35affaa00bf8d44a93a1a5da4b6b56
+guid: 932508c798ffabe4d9393652f51724b0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screw_M
+    second: {fileID: 2100000, guid: b3acfb5885ca98545bbae040b3f5bd7b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

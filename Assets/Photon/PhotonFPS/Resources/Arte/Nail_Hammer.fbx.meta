@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 8e4e51f1ab66fbe458fdc2d924627286
+guid: 52e5d343929c581438eb3788fb998ef6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nail_Hammer_M
+    second: {fileID: 2100000, guid: 8c37975f222a84840948ce102b7ce1c2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

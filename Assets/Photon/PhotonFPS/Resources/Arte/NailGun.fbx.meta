@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 932508c798ffabe4d9393652f51724b0
+guid: cc73c6f50a4a4bc4186989b2f5e94768
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NailGun_M
+    second: {fileID: 2100000, guid: 952ea06760c1e7f468168964e5f96147, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

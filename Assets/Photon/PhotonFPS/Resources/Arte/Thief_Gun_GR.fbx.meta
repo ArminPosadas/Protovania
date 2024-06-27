@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 52e5d343929c581438eb3788fb998ef6
+guid: 8e4e51f1ab66fbe458fdc2d924627286
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Thief_Gun_M
+    second: {fileID: 2100000, guid: 3ba3a89eb4d11cb43aafbe6217d4f43d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
