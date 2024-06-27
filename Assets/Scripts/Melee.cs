@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Melee : FPSMovement
 {
@@ -15,21 +16,24 @@ public class Melee : FPSMovement
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.E) && !isBoosting)
+        if (photonView.IsMine)
         {
-            StartBoost();
-        }
-
-        if (isBoosting)
-        {
-            float elapsed = Time.time - boostStartTime;
-            if (elapsed < boostDuration)
+            if (Input.GetKeyDown(KeyCode.E) && !isBoosting)
             {
-                BoostPlayer();
+                StartBoost();
             }
-            else
+
+            if (isBoosting)
             {
-                StopBoost();
+                float elapsed = Time.time - boostStartTime;
+                if (elapsed < boostDuration)
+                {
+                    BoostPlayer();
+                }
+                else
+                {
+                    StopBoost();
+                }
             }
         }
     }
@@ -41,6 +45,19 @@ public class Melee : FPSMovement
         movementSpeed *= 2f;
         originalDirection = playerCamera.transform.forward;
         boostStartTime = Time.time;
+
+        // Notify other clients about the boost start
+        photonView.RPC("RPC_StartBoost", RpcTarget.Others, boostStartTime, movementSpeed, originalDirection);
+    }
+
+    [PunRPC]
+    void RPC_StartBoost(float startTime, float speed, Vector3 direction)
+    {
+        isBoosting = true;
+        boostStartTime = startTime;
+        originalSpeed = speed / 2f;  // Revert to original speed for non-owners
+        movementSpeed = speed;
+        originalDirection = direction;
     }
 
     void BoostPlayer()
@@ -48,18 +65,35 @@ public class Melee : FPSMovement
         Vector3 moveDirection = new Vector3(originalDirection.x, 0f, originalDirection.z).normalized;
         myCC.Move(moveDirection * movementSpeed * Time.deltaTime);
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, playerRadius);
-        foreach (var hitCollider in hitColliders)
+        if (photonView.IsMine)
         {
-            if (hitCollider.CompareTag("Destructable"))
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, playerRadius);
+            foreach (var hitCollider in hitColliders)
             {
-                Debug.Log("Destroyed: " + hitCollider.gameObject.name);
-                Destroy(hitCollider.gameObject);
+                if (hitCollider.CompareTag("Destructable"))
+                {
+                    Debug.Log("Destroyed: " + hitCollider.gameObject.name);
+                    PhotonView targetPhotonView = hitCollider.GetComponent<PhotonView>();
+                    if (targetPhotonView != null && targetPhotonView.IsMine)
+                    {
+                        PhotonNetwork.Destroy(hitCollider.gameObject);
+                    }
+                }
             }
         }
     }
 
     void StopBoost()
+    {
+        isBoosting = false;
+        movementSpeed = originalSpeed;
+
+        // Notify other clients about the boost stop
+        photonView.RPC("RPC_StopBoost", RpcTarget.Others);
+    }
+
+    [PunRPC]
+    void RPC_StopBoost()
     {
         isBoosting = false;
         movementSpeed = originalSpeed;

@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 
 [RequireComponent(typeof(CharacterController))]
-public class FPSMovement : MonoBehaviour
+public class FPSMovement : MonoBehaviourPun
 {
     private PhotonView PV;
     public CharacterController myCC;
