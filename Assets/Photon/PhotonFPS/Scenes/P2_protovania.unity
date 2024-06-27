@@ -3656,19 +3656,19 @@ PrefabInstance:
     - target: {fileID: 500979585859415203, guid: c8c0e040e1db99b4f8792162e1fc2ef0, type: 3}
       propertyPath: plate1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3336809938487673252}
     - target: {fileID: 500979585859415203, guid: c8c0e040e1db99b4f8792162e1fc2ef0, type: 3}
       propertyPath: plate2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3336809938487673252}
     - target: {fileID: 500979585859415203, guid: c8c0e040e1db99b4f8792162e1fc2ef0, type: 3}
       propertyPath: plate3
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3336809938487673252}
     - target: {fileID: 500979585859415203, guid: c8c0e040e1db99b4f8792162e1fc2ef0, type: 3}
       propertyPath: plate4
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3336809938487673252}
     - target: {fileID: 705796279067720286, guid: c8c0e040e1db99b4f8792162e1fc2ef0, type: 3}
       propertyPath: sceneViewId
       value: 25
@@ -3924,7 +3924,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3336809938487673251}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e7501bda5bd85642848a78de77ef129, type: 3}
   m_Name: 
