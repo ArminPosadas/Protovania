@@ -13,6 +13,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932508c798ffabe4d9393652f51724b0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 321.019
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 932508c798ffabe4d9393652f51724b0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 321.019
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 932508c798ffabe4d9393652f51724b0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 321.019
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 932508c798ffabe4d9393652f51724b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -160,7 +172,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -1184208152849206519}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
