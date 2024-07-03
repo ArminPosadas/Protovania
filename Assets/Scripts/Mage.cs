@@ -36,7 +36,7 @@ public class Mage : FPSMovement
     }
 
     
-    void TryGrabObject()
+     void TryGrabObject()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, grabbableLayer))
