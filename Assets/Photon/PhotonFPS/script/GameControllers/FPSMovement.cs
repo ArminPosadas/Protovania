@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 [RequireComponent(typeof(CharacterController))]
@@ -16,9 +17,15 @@ public class FPSMovement : MonoBehaviourPun
     public Vector3 velocity;
     private bool isGrounded;
     public int health = 20;
+    public Text healthText;
+    private bool isInGhostMode = false;
+    private Coroutine restoreHealthCoroutine;
 
     public Camera playerCamera;
     private float xRotation = 0f;
+
+    public GameObject ghostTriggerAreaPrefab;
+    private GameObject ghostTriggerArea;
 
     public void Start()
     {
@@ -32,6 +39,10 @@ public class FPSMovement : MonoBehaviourPun
                 playerCamera.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
             }
+
+            // Find the HealthText in the scene and assign it
+            healthText = GameObject.Find("HealthText").GetComponent<Text>();
+            UpdateHealthText();
         }
         else
         {
@@ -91,6 +102,118 @@ public class FPSMovement : MonoBehaviourPun
     {
         velocity.y += gravity * Time.deltaTime;
         myCC.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (PV.IsMine && other.CompareTag("Damager"))
+        {
+            PV.RPC("TakeDamage", RpcTarget.All, 1);
+        }
+    }
+
+    [PunRPC]
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (PV.IsMine)
+        {
+            UpdateHealthText();
+        }
+
+        if (health <= 0)
+        {
+            health = 0;
+            GhostMode();
+        }
+    }
+
+    private void UpdateHealthText()
+    {
+        if (healthText != null)
+        {
+            healthText.text = "Health: " + health.ToString();
+        }
+    }
+
+    private void GhostMode()
+    {
+        isInGhostMode = true;
+
+        if (PV.IsMine)
+        {
+            // Create trigger area around the player
+            ghostTriggerArea = Instantiate(ghostTriggerAreaPrefab, transform.position, Quaternion.identity);
+            ghostTriggerArea.transform.SetParent(transform);
+        }
+    }
+
+    private void DisableGhostMode()
+    {
+        isInGhostMode = false;
+
+        if (ghostTriggerArea != null)
+        {
+            Destroy(ghostTriggerArea);
+        }
+
+        health = 5;
+        UpdateHealthText();
+    }
+
+    [PunRPC]
+    private void RestoreHealth()
+    {
+        health = 5;
+        UpdateHealthText();
+        DisableGhostMode();
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (isInGhostMode && PV.IsMine && other.CompareTag("Player"))
+        {
+            if (restoreHealthCoroutine == null)
+            {
+                restoreHealthCoroutine = StartCoroutine(RestoreHealthCoroutine(other));
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (isInGhostMode && PV.IsMine && other.CompareTag("Player"))
+        {
+            if (restoreHealthCoroutine != null)
+            {
+                StopCoroutine(restoreHealthCoroutine);
+                restoreHealthCoroutine = null;
+            }
+        }
+    }
+
+    private IEnumerator RestoreHealthCoroutine(Collider other)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 5f)
+        {
+            if (other != null && other.CompareTag("Player") && Input.GetKey(KeyCode.Q))
+            {
+                elapsedTime += Time.deltaTime;
+            }
+            else
+            {
+                elapsedTime = 0f;
+            }
+
+            yield return null;
+        }
+
+        if (elapsedTime >= 5f)
+        {
+            PV.RPC("RestoreHealth", RpcTarget.All);
+        }
     }
 
     [PunRPC]

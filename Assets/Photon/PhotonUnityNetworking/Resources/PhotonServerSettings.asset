@@ -50,6 +50,8 @@ MonoBehaviour:
   - ApplyDamage
   - RPC_StartBoost
   - RPC_StopBoost
+  - TakeDamage
+  - RestoreHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

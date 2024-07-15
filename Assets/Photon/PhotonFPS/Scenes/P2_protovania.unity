@@ -3217,10 +3217,9 @@ GameObject:
   - component: {fileID: 2052154050}
   - component: {fileID: 2052154049}
   - component: {fileID: 2052154048}
-  - component: {fileID: 2052154052}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Damager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3304,26 +3303,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052154046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.48, y: 79.65, z: -75.83}
+  m_LocalPosition: {x: -4.13, y: 79.65, z: -75.83}
   m_LocalScale: {x: 4.0671, y: 4.0671, z: 4.0671}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2052154052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052154046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b76c144b5ef2e74b984be6a1e3122a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportPosition: {x: 74.29, y: 94.55, z: -157.31}
 --- !u!1 &2061310919
 GameObject:
   m_ObjectHideFlags: 0
@@ -3528,6 +3514,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 690912351}
+    - target: {fileID: 2301436812675888950, guid: eee24c16c662fba4293d10e06bb9fc21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2778963835584343601, guid: eee24c16c662fba4293d10e06bb9fc21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

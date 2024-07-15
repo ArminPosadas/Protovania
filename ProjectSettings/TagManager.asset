@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Destructable
   - whatIsWall
+  - Damager
   layers:
   - Default
   - TransparentFX
