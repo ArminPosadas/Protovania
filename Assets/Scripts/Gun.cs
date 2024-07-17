@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= nextFireTime)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= nextFireTime)
         {
             Shoot();
         }
@@ -57,3 +57,4 @@ public class Gun : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, meleeRange);
     }
 }
+
