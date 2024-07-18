@@ -7,18 +7,18 @@ public class Gun : MonoBehaviour
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
     public float bulletSpeed = 10;
-    //Se encarga de la velocidad de la bala
     public float fireRate = 0.5f;
-    //Se encarga de la velocidad de disparo #Este solo funciona si se manipula en unity NO en el codigo.
 
     public float meleeRange = 2f; // Range of the melee attack
     public int meleeDamage = 50; // Damage dealt by the melee attack
 
-
     private float nextFireTime = 0f;
+    private bool isGunEnabled = true; // New variable to track if the gun is enabled
 
     void Update()
     {
+        if (!isGunEnabled) return; // Exit if the gun is disabled
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= nextFireTime)
         {
             Shoot();
@@ -56,5 +56,16 @@ public class Gun : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeRange);
     }
-}
 
+    // Method to disable the gun
+    public void DisableGun()
+    {
+        isGunEnabled = false;
+    }
+
+    // Method to enable the gun
+    public void EnableGun()
+    {
+        isGunEnabled = true;
+    }
+}

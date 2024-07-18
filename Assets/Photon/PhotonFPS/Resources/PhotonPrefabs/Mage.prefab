@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f9432da835fe34fb8c0f15c4fe9b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCC: {fileID: 0}
+  myCC: {fileID: 4843018815949428196}
   movementSpeed: 6
   sprintSpeed: 10
   mouseSensitivity: 100
@@ -574,7 +574,7 @@ MonoBehaviour:
   health: 20
   healthText: {fileID: 8066019538737563898}
   playerCamera: {fileID: 4827717495087285933}
-  ghostTriggerAreaPrefab: {fileID: 0}
+  ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
   grabDistance: 10
   grabbableLayer:
     serializedVersion: 2

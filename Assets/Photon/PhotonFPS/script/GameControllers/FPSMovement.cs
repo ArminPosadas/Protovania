@@ -19,13 +19,15 @@ public class FPSMovement : MonoBehaviourPun
     public int health = 20;
     public Text healthText;
     private bool isInGhostMode = false;
-    private Coroutine restoreHealthCoroutine;
 
     public Camera playerCamera;
     private float xRotation = 0f;
 
     public GameObject ghostTriggerAreaPrefab;
     private GameObject ghostTriggerArea;
+
+    // Reference to the Gun script
+    public Gun playerGun;
 
     public void Start()
     {
@@ -43,6 +45,9 @@ public class FPSMovement : MonoBehaviourPun
             // Find the HealthText in the scene and assign it
             healthText = GameObject.Find("HealthText").GetComponent<Text>();
             UpdateHealthText();
+
+            // Find the Gun script attached to the player
+            playerGun = GetComponentInChildren<Gun>();
         }
         else
         {
@@ -72,10 +77,10 @@ public class FPSMovement : MonoBehaviourPun
             velocity.y = -2f;
         }
 
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : movementSpeed; 
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : movementSpeed;
 
         Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-        myCC.Move(move * currentSpeed * Time.deltaTime); 
+        myCC.Move(move * currentSpeed * Time.deltaTime);
     }
 
     void BasicRotation()
@@ -116,6 +121,11 @@ public class FPSMovement : MonoBehaviourPun
     public void TakeDamage(int damage)
     {
         health -= damage;
+        if (health < 0)
+        {
+            health = 0;
+        }
+
         if (PV.IsMine)
         {
             UpdateHealthText();
@@ -123,7 +133,6 @@ public class FPSMovement : MonoBehaviourPun
 
         if (health <= 0)
         {
-            health = 0;
             GhostMode();
         }
     }
@@ -138,6 +147,7 @@ public class FPSMovement : MonoBehaviourPun
 
     private void GhostMode()
     {
+        Debug.Log("Ghost mode activated");
         isInGhostMode = true;
 
         if (PV.IsMine)
@@ -145,11 +155,15 @@ public class FPSMovement : MonoBehaviourPun
             // Create trigger area around the player
             ghostTriggerArea = Instantiate(ghostTriggerAreaPrefab, transform.position, Quaternion.identity);
             ghostTriggerArea.transform.SetParent(transform);
+
+            // Disable the gun
+            playerGun.DisableGun();
         }
     }
 
     private void DisableGhostMode()
     {
+        Debug.Log("Ghost mode deactivated");
         isInGhostMode = false;
 
         if (ghostTriggerArea != null)
@@ -157,8 +171,11 @@ public class FPSMovement : MonoBehaviourPun
             Destroy(ghostTriggerArea);
         }
 
-        health = 5;
+        health = 5;  // Restoring health to 5
         UpdateHealthText();
+
+        // Enable the gun
+        playerGun.EnableGun();
     }
 
     [PunRPC]
@@ -173,46 +190,11 @@ public class FPSMovement : MonoBehaviourPun
     {
         if (isInGhostMode && PV.IsMine && other.CompareTag("Player"))
         {
-            if (restoreHealthCoroutine == null)
+            if (Input.GetKey(KeyCode.Q))
             {
-                restoreHealthCoroutine = StartCoroutine(RestoreHealthCoroutine(other));
+                Debug.Log("Q key pressed - attempting to restore health");
+                PV.RPC("RestoreHealth", RpcTarget.All);
             }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (isInGhostMode && PV.IsMine && other.CompareTag("Player"))
-        {
-            if (restoreHealthCoroutine != null)
-            {
-                StopCoroutine(restoreHealthCoroutine);
-                restoreHealthCoroutine = null;
-            }
-        }
-    }
-
-    private IEnumerator RestoreHealthCoroutine(Collider other)
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < 5f)
-        {
-            if (other != null && other.CompareTag("Player") && Input.GetKey(KeyCode.Q))
-            {
-                elapsedTime += Time.deltaTime;
-            }
-            else
-            {
-                elapsedTime = 0f;
-            }
-
-            yield return null;
-        }
-
-        if (elapsedTime >= 5f)
-        {
-            PV.RPC("RestoreHealth", RpcTarget.All);
         }
     }
 
