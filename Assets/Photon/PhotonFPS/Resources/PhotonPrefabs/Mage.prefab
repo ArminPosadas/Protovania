@@ -575,6 +575,7 @@ MonoBehaviour:
   healthText: {fileID: 8066019538737563898}
   playerCamera: {fileID: 4827717495087285933}
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
+  playerGun: {fileID: 6927712312185157086}
   grabDistance: 10
   grabbableLayer:
     serializedVersion: 2

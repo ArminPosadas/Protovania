@@ -394,6 +394,7 @@ MonoBehaviour:
   healthText: {fileID: 336427819860157254}
   playerCamera: {fileID: 5903949891034127345}
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
+  playerGun: {fileID: 3597738956514114456}
 --- !u!1 &7940679548087536000
 GameObject:
   m_ObjectHideFlags: 0

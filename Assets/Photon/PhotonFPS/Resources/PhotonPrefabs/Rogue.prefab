@@ -139,6 +139,7 @@ MonoBehaviour:
   healthText: {fileID: 4209733822157169678}
   playerCamera: {fileID: 9170036252211616859}
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
+  playerGun: {fileID: 4842181818901290216}
   Cam: {fileID: 9170036252211616859}
   climbSpeed: 25
   wallDetectionDistance: 1

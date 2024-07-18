@@ -152,11 +152,9 @@ public class FPSMovement : MonoBehaviourPun
 
         if (PV.IsMine)
         {
-            // Create trigger area around the player
             ghostTriggerArea = Instantiate(ghostTriggerAreaPrefab, transform.position, Quaternion.identity);
             ghostTriggerArea.transform.SetParent(transform);
 
-            // Disable the gun
             playerGun.DisableGun();
         }
     }
@@ -171,10 +169,9 @@ public class FPSMovement : MonoBehaviourPun
             Destroy(ghostTriggerArea);
         }
 
-        health = 5;  // Restoring health to 5
+        health = 5;
         UpdateHealthText();
 
-        // Enable the gun
         playerGun.EnableGun();
     }
 
@@ -201,7 +198,6 @@ public class FPSMovement : MonoBehaviourPun
     [PunRPC]
     public void TeleportPlayer(Vector3 position)
     {
-        // Teleport the player to the specified position
         transform.position = position;
     }
 }

@@ -242,6 +242,7 @@ MonoBehaviour:
   healthText: {fileID: 2187693131393253947}
   playerCamera: {fileID: 8946567755967923138}
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
+  playerGun: {fileID: 2032659383299939402}
   buffDuration: 30
   fireRateIncrease: 0.05
   buffAreaPrefab: {fileID: 8016453903165286651, guid: 4234aea227295b64b862243de60510e4, type: 3}
