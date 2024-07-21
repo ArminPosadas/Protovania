@@ -29,6 +29,9 @@ public class FPSMovement : MonoBehaviourPun
     // Reference to the Gun script
     public Gun playerGun;
 
+    // Reference to the ghost mode image object
+    public Image ghostModeImage;
+
     public void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -48,6 +51,10 @@ public class FPSMovement : MonoBehaviourPun
 
             // Find the Gun script attached to the player
             playerGun = GetComponentInChildren<Gun>();
+
+            // Find the ghost mode image object in the scene
+            ghostModeImage = GameObject.Find("GhostModeImage").GetComponent<Image>();
+            ghostModeImage.enabled = false; // Hide the ghost mode image initially
         }
         else
         {
@@ -156,6 +163,8 @@ public class FPSMovement : MonoBehaviourPun
             ghostTriggerArea.transform.SetParent(transform);
 
             playerGun.DisableGun();
+
+            ghostModeImage.enabled = true;
         }
     }
 
@@ -169,29 +178,27 @@ public class FPSMovement : MonoBehaviourPun
             Destroy(ghostTriggerArea);
         }
 
-        health = 5;
+        health = 10;
         UpdateHealthText();
 
         playerGun.EnableGun();
+
+        ghostModeImage.enabled = false;
     }
 
     [PunRPC]
-    private void RestoreHealth()
+    public void RestoreHealth()
     {
-        health = 5;
+        health = 10;
         UpdateHealthText();
         DisableGhostMode();
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (isInGhostMode && PV.IsMine && other.CompareTag("Player"))
+        if (isInGhostMode && PV.IsMine && other.gameObject.layer == LayerMask.NameToLayer("revivestatue"))
         {
-            if (Input.GetKey(KeyCode.Q))
-            {
-                Debug.Log("Q key pressed - attempting to restore health");
-                PV.RPC("RestoreHealth", RpcTarget.All);
-            }
+            PV.RPC("RestoreHealth", RpcTarget.All);
         }
     }
 
