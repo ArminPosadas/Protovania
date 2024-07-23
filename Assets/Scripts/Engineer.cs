@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Engineer : FPSMovement
 {
@@ -16,30 +17,35 @@ public class Engineer : FPSMovement
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (photonView.IsMine)
         {
-            ToggleBuff();
-        }
-        //desactiva el buff pasando el tiempo
-        if (isBuffActive && Time.time > buffEndTime)
-        {
-            DeactivateBuff();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+
+                RPC_ToggleBuff();
+            }
+            //desactiva el buff pasando el tiempo
+            if (isBuffActive && Time.time > buffEndTime)
+            {
+                RPC_DeactivateBuff();
+            }
         }
     }
 
-    void ToggleBuff()
+    void RPC_ToggleBuff()
     {
         if (isBuffActive)
         {
-            DeactivateBuff();
+            RPC_DeactivateBuff();
         }
         else
         {
-            ActivateBuff();
+            RPC_ActivateBuff();
         }
     }
     //activa el buff y genera la zona en el mapa
-    void ActivateBuff()
+    [PunRPC]
+    void RPC_ActivateBuff()
     {
         isBuffActive = true;
         buffEndTime = Time.time + buffDuration;
@@ -53,7 +59,7 @@ public class Engineer : FPSMovement
         Debug.Log("Buff activado.");
     }
     //desactiva el buff y destruye la zona en el mapa
-    void DeactivateBuff()
+    void RPC_DeactivateBuff()
     {
         isBuffActive = false;
 

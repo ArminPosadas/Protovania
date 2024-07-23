@@ -56,6 +56,9 @@ MonoBehaviour:
   - DestroyBullet
   - MeleeAttack
   - RPC_Shoot
+  - BoostPlayer
+  - RPC_BoostPlayer
+  - RPC_ActivateBuff
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -13,26 +13,31 @@ public class Mage : FPSMovement
     {
         base.Update();
 
-      
-        if (Input.GetKeyDown(KeyCode.E))
+        if (photonView.IsMine)
         {
-            
-            if (!isGrabbing)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                TryGrabObject();
-            }
-            
-            else
-            {
-                ReleaseObject();
-            }
-        }
 
-        
-        if (isGrabbing && grabbedObject != null)
-        {
-            UpdateGrabbedObjectPosition();
+                if (!isGrabbing)
+                {
+                    TryGrabObject();
+                }
+
+                else
+                {
+                    ReleaseObject();
+                }
+
+
+                if (isGrabbing && grabbedObject != null)
+                {
+                    UpdateGrabbedObjectPosition();
+                }
+            }
         }
+      
+        
+
     }
 
     

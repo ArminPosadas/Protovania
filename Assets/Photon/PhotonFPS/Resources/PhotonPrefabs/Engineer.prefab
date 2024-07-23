@@ -243,6 +243,7 @@ MonoBehaviour:
   playerCamera: {fileID: 8946567755967923138}
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
   playerGun: {fileID: 2032659383299939402}
+  ghostModeImage: {fileID: 0}
   buffDuration: 30
   fireRateIncrease: 0.05
   buffAreaPrefab: {fileID: 8016453903165286651, guid: 4234aea227295b64b862243de60510e4, type: 3}
@@ -840,12 +841,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba947966ece9a044873a1823088ef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoint: {fileID: 9071719682273032035}
-  bulletPrefab: {fileID: 7620506156784923289, guid: 17113de6c0985224386f8cbbbf28b2d6, type: 3}
+  gunTransform: {fileID: 0}
+  bullet: {fileID: 0}
   bulletSpeed: 15
   fireRate: 0.06
-  meleeRange: 1.5
-  meleeDamage: 14
 --- !u!114 &1935207010567378327
 MonoBehaviour:
   m_ObjectHideFlags: 0

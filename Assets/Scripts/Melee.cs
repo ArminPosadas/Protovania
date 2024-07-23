@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Melee : FPSMovement
 {
@@ -15,21 +16,24 @@ public class Melee : FPSMovement
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.E) && !isBoosting)
+        if (photonView.IsMine)
         {
-            StartBoost();
-        }
-
-        if (isBoosting)
-        {
-            float elapsed = Time.time - boostStartTime;
-            if (elapsed < boostDuration)
+            if (Input.GetKeyDown(KeyCode.E) && !isBoosting)
             {
-                BoostPlayer();
+                StartBoost();
             }
-            else
+
+            if (isBoosting)
             {
-                StopBoost();
+                float elapsed = Time.time - boostStartTime;
+                if (elapsed < boostDuration)
+                {
+                    RPC_BoostPlayer();
+                }
+                else
+                {
+                    StopBoost();
+                }
             }
         }
     }
@@ -43,7 +47,9 @@ public class Melee : FPSMovement
         boostStartTime = Time.time;
     }
 
-    void BoostPlayer()
+    [PunRPC]
+
+    void RPC_BoostPlayer()
     {
         Vector3 moveDirection = new Vector3(originalDirection.x, 0f, originalDirection.z).normalized;
         myCC.Move(moveDirection * movementSpeed * Time.deltaTime);
@@ -64,6 +70,8 @@ public class Melee : FPSMovement
         isBoosting = false;
         movementSpeed = originalSpeed;
     }
+
+    
 }
 
 
