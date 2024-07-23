@@ -162,7 +162,7 @@ public class FPSMovement : MonoBehaviourPun
             ghostTriggerArea = Instantiate(ghostTriggerAreaPrefab, transform.position, Quaternion.identity);
             ghostTriggerArea.transform.SetParent(transform);
 
-            playerGun.DisableGun();
+            //playerGun.DisableGun();
 
             ghostModeImage.enabled = true;
         }
@@ -181,7 +181,7 @@ public class FPSMovement : MonoBehaviourPun
         health = 10;
         UpdateHealthText();
 
-        playerGun.EnableGun();
+        //playerGun.EnableGun();
 
         ghostModeImage.enabled = false;
     }

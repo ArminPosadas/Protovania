@@ -54,6 +54,8 @@ MonoBehaviour:
   - RestoreHealth
   - Shoot
   - DestroyBullet
+  - MeleeAttack
+  - RPC_Shoot
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
