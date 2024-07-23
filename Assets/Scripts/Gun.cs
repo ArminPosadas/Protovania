@@ -7,18 +7,18 @@ using Unity.VisualScripting;
 
 public class Gun : MonoBehaviourPunCallbacks
 {
-    public Transform gunTransform;
-    public Transform bullet;
-    public float bulletSpeed = 10;
-    public float fireRate = 0.5f;
+    public Transform gunTransform; // Transform que define la posición y rotación del cañón del arma
+    public GameObject bullet;      // Prefab de la bala
+    public float bulletSpeed = 10; // Velocidad de la bala
+    public float fireRate = 0.5f;  // Tasa de disparo
 
-    private float nextFireTime = 0f;
+    private float nextFireTime = 0f; // Tiempo para el próximo disparo
 
     void Start()
     {
         if (bullet == null)
         {
-            Debug.LogError("no es un prefab la bala");
+            Debug.LogError("No es un prefab la bala");
         }
         if (gunTransform == null)
         {
@@ -43,14 +43,14 @@ public class Gun : MonoBehaviourPunCallbacks
     {
         if (bullet == null || gunTransform == null)
         {
-            Debug.LogError("la bala o el transform no esta");
+            Debug.LogError("La bala o el transform no esta asignado");
             return;
         }
 
-        Transform bulletInstance = Instantiate(bullet, gunTransform.position, gunTransform.rotation);
+        GameObject bulletInstance = Instantiate(bullet, gunTransform.position, gunTransform.rotation);
         if (bulletInstance == null)
         {
-            Debug.LogError("fallo la bala");
+            Debug.LogError("fallo la instancia de la bala");
             return;
         }
 
@@ -58,13 +58,14 @@ public class Gun : MonoBehaviourPunCallbacks
         if (rb != null)
         {
             rb.velocity = gunTransform.forward * bulletSpeed;
-            Debug.Log("se dispara con una velocidad: " + rb.velocity);
+            Debug.Log("bala disparada con una velocidad: " + rb.velocity);
         }
         else
         {
-            Debug.LogError("no hay bullet prefab");
+            Debug.LogError("el prefab de la bala no tiene un componente rigidbody");
         }
     }
 }
+
 
 
