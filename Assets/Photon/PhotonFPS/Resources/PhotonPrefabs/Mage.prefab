@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6927712312185157086}
   - component: {fileID: 791720575434035}
   - component: {fileID: 4625359995907683290}
+  - component: {fileID: 2417292406427095645}
   m_Layer: 0
   m_Name: Wand_LP_x2
   m_TagString: Untagged
@@ -29,12 +30,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136108898864339391}
   m_LocalRotation: {x: -0.7386714, y: -0, z: -0, w: 0.67406565}
-  m_LocalPosition: {x: 0.5250001, y: 0.5629997, z: 1.2029991}
-  m_LocalScale: {x: 108.72231, y: 108.72234, z: 108.72231}
+  m_LocalPosition: {x: 0.5250001, y: -0.0370003, z: 1.3059992}
+  m_LocalScale: {x: 108.72231, y: 108.72236, z: 108.72233}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6681729653985212967}
-  m_Father: {fileID: 393424769948696272}
+  m_Father: {fileID: 6239537817528840142}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -95.237, y: 0, z: 0}
 --- !u!33 &4397630257288137888
@@ -140,6 +141,21 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &2417292406427095645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136108898864339391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6225fd3b80d48fa41b5cb2b748e613f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  fireRate: 10
+  camera: {fileID: 4827717495087285933}
 --- !u!1 &620634999148658801
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +190,7 @@ Transform:
   m_Children:
   - {fileID: 1505216424945697461}
   - {fileID: 6115133799826677374}
+  - {fileID: 767968181970289413}
   m_Father: {fileID: 393424769948696272}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -527,6 +544,7 @@ GameObject:
   - component: {fileID: 2259972354078564441}
   - component: {fileID: 9137408987295421917}
   - component: {fileID: 2521415553096695342}
+  - component: {fileID: 6090567461815338736}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Player
@@ -546,7 +564,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 767968181970289413}
   - {fileID: 6239537817528840142}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -696,6 +713,19 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6090567461815338736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327685026822441586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca79f88a2d0c3894989fe9a286bd60ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healt: 100
 --- !u!1 &6647896641370997270
 GameObject:
   m_ObjectHideFlags: 0
