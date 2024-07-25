@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 9152955919846285453}
   - component: {fileID: 8801407005852530723}
   - component: {fileID: 277823705409733476}
-  - component: {fileID: 7136362572964901821}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -396,19 +395,6 @@ MonoBehaviour:
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
   playerGun: {fileID: 0}
   ghostModeImage: {fileID: 0}
---- !u!114 &7136362572964901821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4480117090705727541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca79f88a2d0c3894989fe9a286bd60ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healt: 1
 --- !u!1 &7940679548087536000
 GameObject:
   m_ObjectHideFlags: 0
