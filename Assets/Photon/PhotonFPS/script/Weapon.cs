@@ -33,18 +33,16 @@ public class Weapon : MonoBehaviour
     {
         Ray ray = new Ray(camera.transform.position, camera.transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, 100f))
+        if (Physics.Raycast(ray, out hit, 100f))
         {
             PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
             Debug.Log("Hit: " + hit.transform.name);
 
             if (hit.transform.CompareTag("Enemy"))
             {
-                Debug.Log("Hit an enemy!");
                 Healt healtComponent = hit.transform.gameObject.GetComponent<Healt>();
                 if (healtComponent != null)
                 {
-                    Debug.Log("Enemy hit: applying damage");
                     PhotonView photonView = hit.transform.gameObject.GetComponent<PhotonView>();
                     if (photonView != null && photonView.ViewID != 0)
                     {
@@ -52,10 +50,27 @@ public class Weapon : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogError("PhotonView is null or has an invalid ViewID");
+                        Debug.LogError("PhotonView is null or has an invalid ViewID on " + hit.transform.name);
+                    }
+                }
+            }
+            else if (hit.transform.CompareTag("Puerta"))
+            {
+                puerta puertaComponent = hit.transform.gameObject.GetComponent<puerta>();
+                if (puertaComponent != null)
+                {
+                    PhotonView photonView = hit.transform.gameObject.GetComponent<PhotonView>();
+                    if (photonView != null && photonView.ViewID != 0)
+                    {
+                        photonView.RPC("TakeDamage", RpcTarget.All, damage);
+                    }
+                    else
+                    {
+                        Debug.LogError("PhotonView is null or has an invalid ViewID on " + hit.transform.name);
                     }
                 }
             }
         }
     }
 }
+
