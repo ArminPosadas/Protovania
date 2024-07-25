@@ -59,6 +59,7 @@ MonoBehaviour:
   - BoostPlayer
   - RPC_BoostPlayer
   - RPC_ActivateBuff
+  - RPC_DestroyObject
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

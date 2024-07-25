@@ -20,7 +20,7 @@ public class Melee : FPSMovement
         {
             if (Input.GetKeyDown(KeyCode.E) && !isBoosting)
             {
-                StartBoost();
+                photonView.RPC("RPC_StartBoost", RpcTarget.All);
             }
 
             if (isBoosting)
@@ -28,17 +28,18 @@ public class Melee : FPSMovement
                 float elapsed = Time.time - boostStartTime;
                 if (elapsed < boostDuration)
                 {
-                    RPC_BoostPlayer();
+                    BoostPlayer();
                 }
                 else
                 {
-                    StopBoost();
+                    photonView.RPC("RPC_StopBoost", RpcTarget.All);
                 }
             }
         }
     }
 
-    void StartBoost()
+    [PunRPC]
+    void RPC_StartBoost()
     {
         isBoosting = true;
         originalSpeed = movementSpeed;
@@ -47,9 +48,7 @@ public class Melee : FPSMovement
         boostStartTime = Time.time;
     }
 
-    [PunRPC]
-
-    void RPC_BoostPlayer()
+    void BoostPlayer()
     {
         Vector3 moveDirection = new Vector3(originalDirection.x, 0f, originalDirection.z).normalized;
         myCC.Move(moveDirection * movementSpeed * Time.deltaTime);
@@ -60,18 +59,44 @@ public class Melee : FPSMovement
             if (hitCollider.CompareTag("Destructable"))
             {
                 Debug.Log("Destroyed: " + hitCollider.gameObject.name);
-                Destroy(hitCollider.gameObject);
+                PhotonView hitPhotonView = hitCollider.gameObject.GetComponent<PhotonView>();
+                if (hitPhotonView != null)
+                {
+                    photonView.RPC("RPC_DestroyObject", RpcTarget.All, hitPhotonView.ViewID);
+                }
+                else
+                {
+                    Debug.LogWarning("Destructable object does not have a PhotonView: " + hitCollider.gameObject.name);
+                }
             }
         }
     }
 
-    void StopBoost()
+    [PunRPC]
+    void RPC_StopBoost()
     {
         isBoosting = false;
         movementSpeed = originalSpeed;
     }
 
-    
+    [PunRPC]
+    void RPC_DestroyObject(int viewID)
+    {
+        PhotonView objPhotonView = PhotonView.Find(viewID);
+        if (objPhotonView != null)
+        {
+            GameObject obj = objPhotonView.gameObject;
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("PhotonView not found for viewID: " + viewID);
+        }
+    }
 }
+
 
 
