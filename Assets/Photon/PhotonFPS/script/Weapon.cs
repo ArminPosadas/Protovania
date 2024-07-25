@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     public int damage;
     public float fireRate;
     public Camera camera;
+    [Header("VFX")]
+    public GameObject hitVFX;
 
     private float nextfire;
 
@@ -31,6 +33,7 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 100f))
         {
+            PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
             if (hit.transform.gameObject.GetComponent<Healt>())
             {
                 Debug.Log("recibi daño");

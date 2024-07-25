@@ -902,3 +902,4 @@ MonoBehaviour:
   damage: 25
   fireRate: 10
   camera: {fileID: 8946567755967923138}
+  hitVFX: {fileID: 100000, guid: 53d301af6d66cf94497e9fcec3cb6699, type: 3}
