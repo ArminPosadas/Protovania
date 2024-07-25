@@ -26,11 +26,7 @@ public class FPSMovement : MonoBehaviourPun
     public GameObject ghostTriggerAreaPrefab;
     private GameObject ghostTriggerArea;
 
-    // Reference to the Gun script
-    public Gun playerGun;
-
-    // Reference to the ghost mode image object
-    public Image ghostModeImage;
+    private Weapon playerWeapon;
 
     public void Start()
     {
@@ -49,12 +45,8 @@ public class FPSMovement : MonoBehaviourPun
             healthText = GameObject.Find("HealthText").GetComponent<Text>();
             UpdateHealthText();
 
-            // Find the Gun script attached to the player
-            playerGun = GetComponentInChildren<Gun>();
-
-            // Find the ghost mode image object in the scene
-            ghostModeImage = GameObject.Find("GhostModeImage").GetComponent<Image>();
-            ghostModeImage.enabled = false; // Hide the ghost mode image initially
+            // Find the Weapon script attached to the player
+            playerWeapon = GetComponentInChildren<Weapon>();
         }
         else
         {
@@ -159,12 +151,12 @@ public class FPSMovement : MonoBehaviourPun
 
         if (PV.IsMine)
         {
+            // Create trigger area around the player
             ghostTriggerArea = Instantiate(ghostTriggerAreaPrefab, transform.position, Quaternion.identity);
             ghostTriggerArea.transform.SetParent(transform);
 
-            //playerGun.DisableGun();
-
-            ghostModeImage.enabled = true;
+            // Disable the weapon
+            playerWeapon.enabled = false;
         }
     }
 
@@ -178,33 +170,45 @@ public class FPSMovement : MonoBehaviourPun
             Destroy(ghostTriggerArea);
         }
 
-        health = 10;
+        health = 5;  // Restoring health to 5
         UpdateHealthText();
 
-        //playerGun.EnableGun();
-
-        ghostModeImage.enabled = false;
+        // Enable the weapon
+        playerWeapon.enabled = true;
     }
 
     [PunRPC]
-    public void RestoreHealth()
+    private void RestoreHealth()
     {
-        health = 10;
+        health = 5;
         UpdateHealthText();
         DisableGhostMode();
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (isInGhostMode && PV.IsMine && other.gameObject.layer == LayerMask.NameToLayer("revivestatue"))
+        if (isInGhostMode && PV.IsMine)
         {
-            PV.RPC("RestoreHealth", RpcTarget.All);
+            if (other.gameObject.layer == LayerMask.NameToLayer("revivestatue") && health == 0)
+            {
+                Debug.Log("Collided with Revive Statue - Restoring Health");
+                RestorePlayerHealth();
+            }
         }
+    }
+
+    private void RestorePlayerHealth()
+    {
+        health += 10;
+        if (health > 20) health = 20;
+        UpdateHealthText();
+        DisableGhostMode();
     }
 
     [PunRPC]
     public void TeleportPlayer(Vector3 position)
     {
+        // Teleport the player to the specified position
         transform.position = position;
     }
 }

@@ -227,12 +227,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620634999148658801}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 083e57ece5cdfe14ab3fb388df865509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabDistance: 2
+  grabDistance: 10
   grabbableLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -633,8 +633,6 @@ MonoBehaviour:
   healthText: {fileID: 8066019538737563898}
   playerCamera: {fileID: 4827717495087285933}
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
-  playerGun: {fileID: 0}
-  ghostModeImage: {fileID: 7836272412935208901}
   grabDistance: 10
   grabbableLayer:
     serializedVersion: 2
