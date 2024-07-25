@@ -122,7 +122,7 @@ MonoBehaviour:
   damage: 25
   fireRate: 10
   camera: {fileID: 4827717495087285933}
-  hitVFX: {fileID: 100002, guid: 7a52d3ff698a7dc4dbc5f0152df3371a, type: 3}
+  hitVFX: {fileID: 100004, guid: 33384af7b24a0f14cb7bbf3b795f7a2b, type: 3}
 --- !u!1 &620634999148658801
 GameObject:
   m_ObjectHideFlags: 0
