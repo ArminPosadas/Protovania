@@ -11,9 +11,7 @@ GameObject:
   - component: {fileID: 767968181970289413}
   - component: {fileID: 4397630257288137888}
   - component: {fileID: 1937517758027380842}
-  - component: {fileID: 6927712312185157086}
   - component: {fileID: 791720575434035}
-  - component: {fileID: 4625359995907683290}
   - component: {fileID: 2417292406427095645}
   m_Layer: 0
   m_Name: Wand_LP_x2
@@ -88,22 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6927712312185157086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136108898864339391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eba947966ece9a044873a1823088ef88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunTransform: {fileID: 6681729653985212967}
-  bullet: {fileID: 3533017874894001666, guid: a8456ea1e75a1a3448130f097e89272c, type: 3}
-  bulletSpeed: 20
-  fireRate: 0.03
 --- !u!65 &791720575434035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -125,22 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0021707723, y: 0.010993076, z: 0.0018942023}
   m_Center: {x: 0, y: 0.0054965615, z: 0.000000003972364}
---- !u!114 &4625359995907683290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136108898864339391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &2417292406427095645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +510,7 @@ GameObject:
   - component: {fileID: 2259972354078564441}
   - component: {fileID: 9137408987295421917}
   - component: {fileID: 2521415553096695342}
-  - component: {fileID: 6090567461815338736}
+  - component: {fileID: 3152220540947930285}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Player
@@ -667,7 +633,7 @@ MonoBehaviour:
   healthText: {fileID: 8066019538737563898}
   playerCamera: {fileID: 4827717495087285933}
   ghostTriggerAreaPrefab: {fileID: 5260674075722719155, guid: 39ed07f3f2d95a14d838e14855dc2d81, type: 3}
-  playerGun: {fileID: 6927712312185157086}
+  playerGun: {fileID: 0}
   ghostModeImage: {fileID: 7836272412935208901}
   grabDistance: 10
   grabbableLayer:
@@ -709,11 +675,10 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 9137408987295421917}
-  - {fileID: 4625359995907683290}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6090567461815338736
+--- !u!114 &3152220540947930285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,7 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca79f88a2d0c3894989fe9a286bd60ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healt: 100
+  healt: 1
 --- !u!1 &6647896641370997270
 GameObject:
   m_ObjectHideFlags: 0

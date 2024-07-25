@@ -16,7 +16,7 @@ public class destroyDoor2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("las variables .. " + vivos1 + "y .. " + vivos2);
+        //Debug.Log("las variables .. " + vivos1 + "y .. " + vivos2);
         if (!vivos1 && !vivos2)
         {
             Destroy(gameObject);

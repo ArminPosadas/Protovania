@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7513869196730916004}
   - component: {fileID: 8206528132206705694}
   - component: {fileID: 1050865863644256731}
+  - component: {fileID: -4952655132799080427}
   m_Layer: 0
   m_Name: enemy - mele 2
   m_TagString: Enemy
@@ -194,6 +195,19 @@ MonoBehaviour:
   objetivo: {fileID: 6927220949601878377, guid: cdce32fce5c05b347aa602e692d242ee, type: 3}
   velocidad: 5
   IA: {fileID: 7367293517897535421}
+--- !u!114 &-4952655132799080427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971271828177683873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca79f88a2d0c3894989fe9a286bd60ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healt: 69
 --- !u!1 &997812129521637594
 GameObject:
   m_ObjectHideFlags: 0

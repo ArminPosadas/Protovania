@@ -12,7 +12,7 @@ public class Healt : MonoBehaviour
     {
         healt -= _damage;
 
-        if (healt <= 8)
+        if (healt <= 0)
         {
             Destroy(gameObject);
         }

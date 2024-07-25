@@ -16,7 +16,8 @@ public class Weapon : MonoBehaviour
         if (nextfire < 0)
             nextfire = 0;
 
-        if (Input.GetButton("Fire1") && nextfire <= 0)
+        // if (Input.GetButton("Fire1") && nextfire <= 0)
+        if (Input.GetButton("Fire1"))
         {
             nextfire = 1/fireRate;
 
@@ -32,7 +33,9 @@ public class Weapon : MonoBehaviour
         {
             if (hit.transform.gameObject.GetComponent<Healt>())
             {
-                hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamege", RpcTarget.All, damage);
+                Debug.Log("recibi daño");
+                hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage);
+                
             }
         }
     }

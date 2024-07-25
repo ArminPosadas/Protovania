@@ -20,7 +20,7 @@ public class EnemyEngineerFollowing : MonoBehaviour
         IA.SetDestination(objetivo.position);
 
 
-        objetivo = GameObject.Find("Engineer(Clone)").transform;
+        //objetivo = GameObject.Find("Engineer(Clone)").transform;
 
     }
 

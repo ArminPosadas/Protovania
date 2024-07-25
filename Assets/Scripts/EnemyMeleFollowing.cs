@@ -19,7 +19,7 @@ public class EnemyMeleFollowing : MonoBehaviour
         IA.SetDestination(objetivo.position);
 
 
-        objetivo = GameObject.Find("Player2(Clone)").transform;
+        //objetivo = GameObject.Find("Player2(Clone)").transform;
 
     }
 
