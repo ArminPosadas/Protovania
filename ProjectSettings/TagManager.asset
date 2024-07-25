@@ -9,6 +9,7 @@ TagManager:
   - Destructable
   - whatIsWall
   - Damager
+  - puerta
   layers:
   - Default
   - TransparentFX
