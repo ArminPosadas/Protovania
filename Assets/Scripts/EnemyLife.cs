@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class EnemyLife : MonoBehaviour
         abrir = puerta.GetComponent<destroyDoor2>();
     }
 
+
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         //   Debug.Log(currentHealth + "EnemyLife");

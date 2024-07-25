@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class Weapon : MonoBehaviour
 {
-    public int damage;
+    public int damage = 25;
     public float fireRate;
     public Camera camera;
     [Header("VFX")]
@@ -18,12 +18,14 @@ public class Weapon : MonoBehaviour
         if (nextfire < 0)
             nextfire = 0;
 
-        // if (Input.GetButton("Fire1") && nextfire <= 0)
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && nextfire <= 0)
         {
-            nextfire = 1/fireRate;
-
+            nextfire = 1 / fireRate;
             Fire();
+        }
+        else
+        {
+            nextfire -= Time.deltaTime;
         }
     }
 
@@ -34,13 +36,26 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 100f))
         {
             PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
-            if (hit.transform.gameObject.GetComponent<Healt>())
+            Debug.Log("Hit: " + hit.transform.name);
+
+            if (hit.transform.CompareTag("Enemy"))
             {
-                Debug.Log("recibi daño");
-                hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage);
-                
+                Debug.Log("Hit an enemy!");
+                Healt healtComponent = hit.transform.gameObject.GetComponent<Healt>();
+                if (healtComponent != null)
+                {
+                    Debug.Log("Enemy hit: applying damage");
+                    PhotonView photonView = hit.transform.gameObject.GetComponent<PhotonView>();
+                    if (photonView != null && photonView.ViewID != 0)
+                    {
+                        photonView.RPC("TakeDamage", RpcTarget.All, damage);
+                    }
+                    else
+                    {
+                        Debug.LogError("PhotonView is null or has an invalid ViewID");
+                    }
+                }
             }
         }
     }
 }
-  

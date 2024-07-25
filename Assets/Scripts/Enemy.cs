@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class Enemy : MonoBehaviour
     private GameObject puerta;
 
     private destroyDoor2 abrir;
-
+    
     void Start()
     {
         currentHealth = maxHealth; // Initialize current health
@@ -17,6 +18,9 @@ public class Enemy : MonoBehaviour
         abrir = puerta.GetComponent<destroyDoor2>();
     }
 
+
+
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         Debug.Log(currentHealth);
